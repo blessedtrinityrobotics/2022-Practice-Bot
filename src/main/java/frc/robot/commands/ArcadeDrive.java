@@ -30,6 +30,11 @@ public class ArcadeDrive extends CommandBase {
     }
 
     @Override
+    public void initialize() {
+        m_drivetrain.resetEncoders();
+    }
+
+    @Override
     public void execute() {
         m_drivetrain.arcadeDrive(m_speed.getAsDouble(), m_direction.getAsDouble());
     }

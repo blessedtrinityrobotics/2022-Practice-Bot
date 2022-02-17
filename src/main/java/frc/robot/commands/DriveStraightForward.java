@@ -23,6 +23,7 @@ public class DriveStraightForward extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    m_drivetrain.resetEncoders();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -30,10 +31,10 @@ public class DriveStraightForward extends CommandBase {
   public void execute() {
     double leftPower = 0;
     double rightPower = 0;
-    if (m_drivetrain.getLeftDist() > dist) {
+    if (m_drivetrain.getLeftDist() < dist) {
       leftPower = 0.5;
     }
-    if (m_drivetrain.getRightDist() > dist) {
+    if (m_drivetrain.getRightDist() < dist) {
       rightPower = 0.5;
     }
 

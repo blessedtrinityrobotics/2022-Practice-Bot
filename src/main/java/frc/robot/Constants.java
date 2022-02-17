@@ -28,12 +28,6 @@ public final class Constants {
     }
 
     public static final class ShuffleboardConstants {
-<<<<<<< HEAD
         public static final String kDriveTab = "Driving";
     }
-=======
-        public static final String kDriveTab = "Drive";
-    }
-
->>>>>>> 677cc5d8471164264a540dc73d6c23c675f112b7
 }
