@@ -5,6 +5,9 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.wpilibj.ADIS16470_IMU;
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
@@ -40,6 +43,7 @@ public class Drivetrain extends SubsystemBase {
   Encoder m_leftEncoder = new Encoder(kLeftEncoder[0], kLeftEncoder[1]);
   Encoder m_rightEncoder = new Encoder(kRightEncoder[0], kRightEncoder[1]);
 
+  ADIS16470_IMU gyro = new ADIS16470_IMU(); 
   DifferentialDrive m_drive = new DifferentialDrive(m_left, m_right);
   
   /** Creates a new Drivetrain. */
@@ -50,18 +54,23 @@ public class Drivetrain extends SubsystemBase {
     Shuffleboard.getTab(kDriveTab).add("Left Motor", m_left);
     Shuffleboard.getTab(kDriveTab).add("Right Encoder", m_rightEncoder);
     Shuffleboard.getTab(kDriveTab).add("Right Motor", m_right);
-    m_leftEncoder.setDistancePerPulse(1.0/360.0 * 6.0 * Math.PI);
-    m_rightEncoder.setDistancePerPulse(1.0/360.0 * 6.0 * Math.PI);
+    Shuffleboard.getTab(kDriveTab).add("Gyro", gyro);
+
+    gyro.calibrate();
+
+    m_leftEncoder.setDistancePerPulse(1.0/360.0 * 0.5 * Math.PI);
+    m_rightEncoder.setDistancePerPulse(1.0/360.0 * 0.5 * Math.PI);
  }
 
  public void resetEncoders() {
     m_leftEncoder.reset();
     m_rightEncoder.reset();
-
+    gyro.calibrate();
  }
 
   @Override
   public void periodic() {
+    SmartDashboard.putNumber("Gyro", gyro.getRate());
   }
 
   public void arcadeDrive(double speed, double direction) {

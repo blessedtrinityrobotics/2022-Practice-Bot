@@ -71,6 +71,7 @@ public class RobotContainer {
 
   public void teleopInit() {
     m_drivetrain.setDefaultCommand(m_driveStyleChooser.getSelected());
+    m_drivetrain.resetEncoders();
   }
 
   /**
