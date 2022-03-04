@@ -23,6 +23,7 @@ import static frc.robot.Constants.ShuffleboardConstants.*;
 import java.util.Map;
 
 public class Drivetrain extends SubsystemBase {
+  // This does not work at all 
   NetworkTableEntry speedMult = 
     Shuffleboard.getTab(kDriveTab)
       .addPersistent("Speed Multiplier", 1)
@@ -74,7 +75,7 @@ public class Drivetrain extends SubsystemBase {
   }
 
   public void arcadeDrive(double speed, double direction) {
-    Double mult = speedMult.getDouble(1.0);
+    Double mult = speedMult.getDouble(1.0) * 0.5;
     m_drive.arcadeDrive(speed * mult, direction * mult);
   }
 
